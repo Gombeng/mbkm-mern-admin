@@ -4,30 +4,26 @@ import styled from 'styled-components';
 import { Button, Input } from '../../components/Components';
 
 const Profil = () => {
-	let mhsInfo = JSON.parse(localStorage.getItem('mhsInfo'));
-	
+	let adminInfo = JSON.parse(localStorage.getItem('adminInfo'));
+
 	return (
 		<div>
 			<Helmet>
-				<title>Profil | Lapor MBKM</title>
+				<title>Profil | ADMIN Lapor MBKM </title>
 			</Helmet>
-			
+
 			<h2 className="mb-1">Profil</h2>
 			<hr className="mb-1" />
 
 			<Flexbox>
 				<Container className="p-1">
 					<div className="mb-1">
-						<p>NIM</p>
-						<strong>{mhsInfo.nim}</strong>
-					</div>
-					<div className="mb-1">
 						<p>Nama Lengkap</p>
-						<strong>{mhsInfo.fullName}</strong>
+						<strong>{adminInfo?.fullName}</strong>
 					</div>
 					<div className="mb-1">
 						<p>Email</p>
-						<strong>{mhsInfo.email}</strong>
+						<strong>{adminInfo?.email}</strong>
 					</div>
 				</Container>
 			</Flexbox>

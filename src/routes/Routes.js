@@ -6,14 +6,12 @@ import {
 } from 'react-router-dom';
 import {
 	Login,
-	Register,
 	MainApp,
 	Dashboard,
-	UploadSK,
-	IsiBorang,
-	Logsheet,
 	Profil,
 	NotFound,
+	Isirps,
+	MahasiswaMbkm,
 } from '../pages/Pages';
 
 const Routes = () => {
@@ -21,13 +19,11 @@ const Routes = () => {
 		<Router>
 			<Switch>
 				<Route index exact path="login" element={<Login />} />
-				<Route exact path="register" element={<Register />} />
 				<Route exact path="/" element={<MainApp />}>
 					<Route index element={<Dashboard />} />
 					<Route exact path="dashboard" element={<Dashboard />} />
-					<Route exact path="upload-sk" element={<UploadSK />} />
-					<Route exact path="isi-borang" element={<IsiBorang />} />
-					<Route exact path="logsheet" element={<Logsheet />} />
+					<Route exact path="isi-rps" element={<Isirps />} />
+					<Route exact path="mahasiswa-mbkm" element={<MahasiswaMbkm />} />
 					<Route exact path="profil" element={<Profil />} />
 					<Route exact path="*" element={<NotFound />} />
 				</Route>

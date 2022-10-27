@@ -3,26 +3,15 @@ import { Helmet } from 'react-helmet';
 import { Button } from '../../components/Components';
 
 const Dashboard = () => {
-	let mhsInfo = JSON.parse(localStorage.getItem('mhsInfo'));
+	let adminInfo = JSON.parse(localStorage.getItem('adminInfo'));
 	return (
 		<div>
 			<Helmet>
-				<title>Dashboard | Lapor MBKM</title>
+				<title>Dashboard | ADMIN Lapor MBKM</title>
 			</Helmet>
 			<div className="mb-1">
-				<h2>Selamat datang, {mhsInfo.fullName}!</h2>
-				<p>Nim {mhsInfo.nim}</p>
-				<p>Jangan lupa isi borangnya hehe!</p>
-			</div>
-
-			<div className="mb-1">
-				<h2>Todo</h2>
-				<li>
-					Upload Surat Keterangan diterima Mitra{' '}
-					<Button className="button" title="Upload SK" />
-				</li>
-				<li>Isi borang penyetaraan mata kuliah</li>
-				<li>Isi Logsheet Harian</li>
+				<h2>Selamat datang, {adminInfo?.fullName}!</h2>
+				<p>{adminInfo?.email}</p>
 			</div>
 		</div>
 	);

@@ -11,9 +11,9 @@ const Login = () => {
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		const mhsInfo = localStorage.getItem('mhsInfo');
+		const adminInfo = localStorage.getItem('adminInfo');
 
-		if (mhsInfo) {
+		if (adminInfo) {
 			navigate('/dashboard');
 		}
 	}, [navigate]);
@@ -36,17 +36,17 @@ const Login = () => {
 			setLoading(true);
 
 			const { data } = await axios.post(
-				'http://localhost:8910/api/student/login',
+				'http://localhost:8910/api/admin/login',
 				{
 					email,
-					password
+					password,
 				},
 				config
 			);
 
-			console.log(data);
+			console.log(data.data);
 
-			localStorage.setItem('mhsInfo', JSON.stringify(data));
+			localStorage.setItem('adminInfo', JSON.stringify(data.data));
 			setLoading(false);
 			navigate('/dashboard');
 		} catch (error) {
@@ -59,7 +59,7 @@ const Login = () => {
 	return (
 		<Container>
 			<Helmet>
-				<title>Masuk | Lapor MBKM</title>
+				<title>Masuk | ADMIN Lapor MBKM</title>
 			</Helmet>
 
 			<div className="left">
@@ -94,11 +94,6 @@ const Login = () => {
 						title={loading ? <ClipLoader size={20} /> : 'Masuk'}
 						className="button mr-1"
 						type="submit"
-					/>
-					<Button
-						title="Daftar"
-						className="button outline"
-						onClick={() => navigate('/register')}
 					/>
 				</div>
 			</form>
@@ -142,7 +137,7 @@ const Container = styled.div`
 		}
 	}
 
-	.mr-1{
+	.mr-1 {
 		margin-right: 1rem;
 	}
 `;

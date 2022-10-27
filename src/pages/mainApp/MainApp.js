@@ -8,9 +8,9 @@ const MainApp = () => {
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		const mhsInfo = localStorage.getItem('mhsInfo');
+		const adminInfo = localStorage.getItem('adminInfo');
 
-		if (!mhsInfo) {
+		if (!adminInfo) {
 			navigate('/login');
 		}
 	}, [navigate]);
@@ -28,21 +28,15 @@ const MainApp = () => {
 					</NavLink>
 					<NavLink
 						className={({ isActive }) => (isActive ? 'link active' : 'link')}
-						to="upload-sk"
+						to="isi-rps"
 					>
-						Upload SK
+						Isi RPS Mata Kuliah
 					</NavLink>
 					<NavLink
 						className={({ isActive }) => (isActive ? 'link active' : 'link')}
-						to="isi-borang"
+						to="mahasiswa-mbkm"
 					>
-						Isi borang
-					</NavLink>
-					<NavLink
-						className={({ isActive }) => (isActive ? 'link active' : 'link')}
-						to="logsheet"
-					>
-						Logsheet
+						Mahasiswa MBKM
 					</NavLink>
 					<NavLink
 						className={({ isActive }) => (isActive ? 'link active' : 'link')}
