@@ -10,6 +10,20 @@ const InputMatkul = () => {
 	const [matkul, setMatkul] = useState('');
 	const [name, setName] = useState('');
 
+	const columns = useMemo(
+		() => [
+			{
+				Header: 'Kode Mata Kuliah',
+				accessor: 'code',
+			},
+			{
+				Header: 'Nama Mata Kuliah',
+				accessor: 'name',
+			},
+		],
+		[]
+	);
+
 	useEffect(() => {
 		(async () => {
 			const config = {
@@ -99,7 +113,7 @@ const InputMatkul = () => {
 
 				<hr className="mb-1" />
 
-				{matkul.length > 0
+				{/* {matkul.length > 0
 					? matkul.map(({ code, name }, index) => (
 							<div key={index}>
 								<p>
@@ -107,7 +121,8 @@ const InputMatkul = () => {
 								</p>
 							</div>
 					  ))
-					: null}
+					: null} */}
+				{matkul.length > 0 ? <Table columns={columns} data={matkul} /> : null}
 			</div>
 		</div>
 	);
