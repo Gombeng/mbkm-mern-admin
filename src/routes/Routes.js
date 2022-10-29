@@ -23,7 +23,7 @@ const Routes = () => {
 				<Route exact path="/" element={<MainApp />}>
 					<Route index element={<Dashboard />} />
 					<Route exact path="dashboard" element={<Dashboard />} />
-					<Route exact path="isi-matkul" element={<InputMatkul />} />
+					<Route exact path="input-matkul" element={<InputMatkul />} />
 					<Route exact path="isi-rps" element={<Isirps />} />
 					<Route exact path="mahasiswa-mbkm" element={<MahasiswaMbkm />} />
 					<Route exact path="profil" element={<Profil />} />

@@ -31,12 +31,12 @@ const Table = ({ columns, data }) => {
 
 	return (
 		<div>
-			<Input
+			{/* <Input
 				className="border p-1 mb-1"
 				value={filterInput}
 				onChange={handleFilterChange}
 				placeholder={'Search name'}
-			/>
+			/> */}
 			<StyledTable {...getTableProps()} className="mb-1">
 				<thead>
 					{headerGroups.map((headerGroup) => (

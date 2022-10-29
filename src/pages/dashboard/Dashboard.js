@@ -1,9 +1,9 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import { Button } from '../../components/Components';
 
 const Dashboard = () => {
 	let adminInfo = JSON.parse(localStorage.getItem('adminInfo'));
+	// console.log(adminInfo);
 	return (
 		<div>
 			<Helmet>

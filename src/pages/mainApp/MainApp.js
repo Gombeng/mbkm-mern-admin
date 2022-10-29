@@ -28,7 +28,7 @@ const MainApp = () => {
 					</NavLink>
 					<NavLink
 						className={({ isActive }) => (isActive ? 'link active' : 'link')}
-						to="isi-matkul"
+						to="input-matkul"
 					>
 						Input Mata Kuliah
 					</NavLink>
