@@ -80,6 +80,10 @@ export default Table;
 const StyledTable = styled.table`
 	width: 100%;
 
+	tr:nth-child(even) {
+		background: #ccc;
+	}
+
 	th,
 	td {
 		border-bottom: 1px solid black;

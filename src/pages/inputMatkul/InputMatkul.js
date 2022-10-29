@@ -13,6 +13,11 @@ const InputMatkul = () => {
 	const columns = useMemo(
 		() => [
 			{
+				Header: 'No',
+				id: 'index',
+				accessor: (_row: any, i: number) => i + 1,
+			},
+			{
 				Header: 'Kode Mata Kuliah',
 				accessor: 'code',
 			},
