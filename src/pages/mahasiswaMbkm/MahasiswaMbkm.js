@@ -9,29 +9,46 @@ const MahasiswaMbkm = () => {
 	// Using useEffect to call the API once mounted and set the data
 	useEffect(() => {
 		(async () => {
-			const result = await axios('https://api.tvmaze.com/search/shows?q=snow');
-			setData(result.data);
-			console.log(result.data);
+			const config = {
+				headers: {
+					'Content-type': 'application/json',
+				},
+			};
+
+			const { data } = await axios.get(
+				`http://localhost:8910/api/student/getAll`,
+				config
+			);
+
+			setData(data);
+
+			// localStorage.setItem('adminInfo', JSON.stringify(data));
+			console.log(data);
 		})();
 	}, []);
 
 	const columns = useMemo(
 		() => [
 			{
+				Header: 'No',
+				id: 'index',
+				accessor: (_row: any, i: number) => i + 1,
+			},
+			{
 				Header: 'NIM',
-				accessor: 'show.name',
+				accessor: 'nim',
 			},
 			{
 				Header: 'Nama Lengkap',
-				accessor: 'show.type',
+				accessor: 'fullName',
 			},
 			{
 				Header: 'SK Mitra',
-				accessor: 'show.language',
+				accessor: 'skMitra',
 			},
 			{
 				Header: 'Borang Konversi',
-				accessor: 'show.genres',
+				accessor: '',
 			},
 			{
 				Header: 'Logsheet Harian',
