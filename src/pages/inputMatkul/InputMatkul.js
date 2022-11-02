@@ -40,13 +40,13 @@ const InputMatkul = () => {
 			const adminInfo = JSON.parse(localStorage.getItem('adminInfo'));
 
 			const { data } = await axios.get(
-				`http://localhost:8910/api/admin/getOne/${adminInfo?._id}`,
+				`http://localhost:8910/api/admin/getAll/subjects/${adminInfo?._id}`,
 				config
 			);
 
-			setMatkul(data.subjects);
+			setMatkul(data.data._subjects);
 
-			localStorage.setItem('adminInfo', JSON.stringify(data));
+			localStorage.setItem('adminInfo', JSON.stringify(data.data));
 			console.log(data.subjects);
 		})();
 	}, []);
@@ -118,15 +118,6 @@ const InputMatkul = () => {
 
 				<hr className="mb-1" />
 
-				{/* {matkul.length > 0
-					? matkul.map(({ code, name }, index) => (
-							<div key={index}>
-								<p>
-									{code} | {name}
-								</p>
-							</div>
-					  ))
-					: null} */}
 				{matkul.length > 0 ? <Table columns={columns} data={matkul} /> : null}
 			</div>
 		</div>
