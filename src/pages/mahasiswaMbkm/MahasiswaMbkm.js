@@ -71,7 +71,11 @@ const MahasiswaMbkm = () => {
 			<h2 className="mb-1">Mahasiswa MBKM</h2>
 			<hr className="mb-1" />
 
-			<Table columns={columns} data={data} />
+			{data.length > 0 ? (
+				<Table columns={columns} data={data} />
+			) : (
+				<p>Data tidak tersedia!</p>
+			)}
 		</div>
 	);
 };

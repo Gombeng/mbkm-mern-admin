@@ -52,3 +52,10 @@ body {
 .mb-1 {
 	margin-bottom: 1rem;
 }
+
+.sticky-top {
+	position: sticky;
+	top: 0;
+	width: 100%;
+	background-color: rgb(252, 90, 90);
+}

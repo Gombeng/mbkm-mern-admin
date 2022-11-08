@@ -34,6 +34,8 @@ const Flex = styled.div`
 `;
 
 const Container = styled.div`
+	/* position: sticky;
+	top: 0; */
 	padding: 0 2rem;
 	display: flex;
 	background: #043175;

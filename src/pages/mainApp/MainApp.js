@@ -56,7 +56,7 @@ const MainApp = () => {
 					<Outlet />
 				</div>
 			</Container>
-			<Footer />
+			{/* <Footer /> */}
 		</div>
 	);
 };
@@ -71,7 +71,6 @@ const Container = styled.div`
 		display: flex;
 		flex-direction: column;
 		min-width: 15rem;
-		background: #b6c2ff;
 		color: #fff;
 		background: #043175;
 

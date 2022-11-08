@@ -25,6 +25,10 @@ const InputMatkul = () => {
 				Header: 'Nama Mata Kuliah',
 				accessor: 'name',
 			},
+			{
+				Header: 'Aksi',
+				// accessor: 'name',
+			},
 		],
 		[]
 	);
@@ -96,13 +100,13 @@ const InputMatkul = () => {
 				<Input
 					value={code}
 					onChange={(e) => setCode(e.target.value)}
-					className="border p-1"
+					className="p-1"
 					placeholder="Kode Mata Kuliah"
 				/>
 				<Input
 					value={name}
 					onChange={(e) => setName(e.target.value)}
-					className="border p-1 mb-1"
+					className="p-1 mb-1"
 					placeholder="Nama Mata Kuliah"
 				/>
 

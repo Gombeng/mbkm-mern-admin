@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import styled from 'styled-components';
 import { Button, Input } from '../../components/Components';
+import { ClipLoader } from 'react-spinners/ClipLoader';
 
 const Profil = () => {
-	let adminInfo = JSON.parse(localStorage.getItem('adminInfo'));
+	const adminInfo = JSON.parse(localStorage.getItem('adminInfo'));
+	const [loading, setLoading] = useState(false);
 
 	return (
 		<div>
@@ -15,27 +17,22 @@ const Profil = () => {
 			<h2 className="mb-1">Profil</h2>
 			<hr className="mb-1" />
 
-			<Flexbox>
-				<Container className="p-1">
-					<div className="mb-1">
-						<p>Nama Lengkap</p>
-						<strong>{adminInfo?.fullName}</strong>
-					</div>
-					<div className="mb-1">
-						<p>Email</p>
-						<strong>{adminInfo?.email}</strong>
-					</div>
-				</Container>
-			</Flexbox>
+			<div className="mb-1">
+				<p>Nama Lengkap</p>
+				<strong>{adminInfo?.fullName}</strong>
+			</div>
+			<div className="mb-1">
+				<p>Email</p>
+				<strong>{adminInfo?.email}</strong>
+			</div>
+
+			<Button
+				title={loading ? <ClipLoader size={20} /> : 'Edit'}
+				className="button mr-1"
+				type="submit"
+			/>
 		</div>
 	);
 };
-
-const Container = styled.div`
-	flex: 1;
-`;
-const Flexbox = styled.div`
-	display: flex;
-`;
 
 export default Profil;
