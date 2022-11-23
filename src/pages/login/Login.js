@@ -67,7 +67,7 @@ const Login = () => {
 			</div>
 
 			<form className="right" onSubmit={submitHandler}>
-				<h2 className="mb-1">Silahkan Masuk</h2>
+				<h3 className="mb-1">Silahkan Masuk</h3>
 
 				{error && <Message className="mb-1 error">{error}</Message>}
 

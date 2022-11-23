@@ -10,7 +10,7 @@ const Dashboard = () => {
 				<title>Dashboard | ADMIN Lapor MBKM</title>
 			</Helmet>
 			<div className="mb-1">
-				<h2>Selamat datang, {adminInfo?.fullName}!</h2>
+				<h3>Selamat datang, {adminInfo?.fullName}!</h3>
 				<p>{adminInfo?.email}</p>
 			</div>
 		</div>

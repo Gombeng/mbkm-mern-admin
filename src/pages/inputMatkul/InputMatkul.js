@@ -92,7 +92,7 @@ const InputMatkul = () => {
 				<title>Input Mata Kuliah | ADMIN Lapor MBKM </title>
 			</Helmet>
 
-			<h2 className="mb-1">Input Mata Kuliah</h2>
+			<h3 className="mb-1">Input Mata Kuliah</h3>
 			<hr className="mb-1" />
 
 			{/* form untuk inputan kode cpmk dan deskcripsi cpmk beserta button submit */}

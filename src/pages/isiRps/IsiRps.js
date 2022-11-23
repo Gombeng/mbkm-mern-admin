@@ -79,7 +79,7 @@ const Isirps = () => {
 
 			console.log(data.data);
 
-			// localStorage.setItem('adminInfo', JSON.stringify(data.data));
+			// localStorage.setItem('adminInfo', JSON.stringify(data.0`data));
 			setLoading(false);
 		} catch (error) {
 			setLoading(false);
@@ -94,7 +94,7 @@ const Isirps = () => {
 				<title>Isi RPS | ADMIN Lapor MBKM </title>
 			</Helmet>
 
-			<h2 className="mb-1">Isi RPS</h2>
+			<h3 className="mb-1">Isi RPS</h3>
 			<hr className="mb-1" />
 
 			<form className="mb-1" onSubmit={submitHandler}>

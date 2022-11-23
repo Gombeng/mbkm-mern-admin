@@ -68,7 +68,7 @@ const MahasiswaMbkm = () => {
 				<title>Mahasiswa MBKM | ADMIN Lapor MBKM </title>
 			</Helmet>
 
-			<h2 className="mb-1">Mahasiswa MBKM</h2>
+			<h3 className="mb-1">Mahasiswa MBKM</h3>
 			<hr className="mb-1" />
 
 			{data.length > 0 ? (
