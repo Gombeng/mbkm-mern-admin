@@ -35,7 +35,7 @@ const Isirps = () => {
 	const [code, setCode] = useState('');
 	const [loading, setLoading] = useState(false);
 
-	console.log(subject);
+	console.log('data matkul', data);
 
 	useEffect(() => {
 		(async () => {
@@ -88,6 +88,8 @@ const Isirps = () => {
 		}
 	};
 
+	let i = 1;
+
 	return (
 		<div>
 			<Helmet>
@@ -105,7 +107,7 @@ const Isirps = () => {
 					required
 				>
 					<option value="">-- Pilih Mata Kuliah --</option>
-					{data.map(({ _id, name }) => (
+					{data?.map(({ _id, name }) => (
 						<option value={_id}>{name}</option>
 					))}
 				</Select>
@@ -133,13 +135,33 @@ const Isirps = () => {
 			<hr className="mb-1" />
 
 			{/* tampilan informasi mengenai poin rps yang sudah diisi oleh dosen */}
-			{data.map(({ name, _cpmks }, index) => (
-				<div key={index}>
-					<h3>{name}</h3>
+			{data.length &&
+				data?.map(({ name, _cpmks }, index) => (
+					<div key={index}>
+						<h3>{name}</h3>
 
-					<Table columns={columns} data={_cpmks} />
-				</div>
-			))}
+						<Table className="mb-1">
+							<thead>
+								<tr>
+									<th style={{ width: '5rem' }}>No</th>
+									<th style={{ width: '10rem' }}>Kode CPL</th>
+									<th style={{ width: '' }}>Deskripsi CPL</th>
+									<th style={{ width: '' }}>Aksi</th>
+								</tr>
+							</thead>
+							<tbody>
+								{_cpmks.length &&
+									_cpmks?.map(({ _id, code, name }) => (
+										<tr key={_id}>
+											<td>{i++}</td>
+											<td>{code}</td>
+											<td>{name}</td>
+										</tr>
+									))}
+							</tbody>
+						</Table>
+					</div>
+				))}
 		</div>
 	);
 };

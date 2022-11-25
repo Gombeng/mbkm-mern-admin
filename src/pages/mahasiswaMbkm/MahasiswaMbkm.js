@@ -1,12 +1,13 @@
 import axios from 'axios';
-import React, { useMemo, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
-import { Table } from '../../components/Components';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+import { Table } from './../../components/Components';
 
 const MahasiswaMbkm = () => {
 	const [data, setData] = useState([]);
 
-	// Using useEffect to call the API once mounted and set the data
 	useEffect(() => {
 		(async () => {
 			const config = {
@@ -21,46 +22,10 @@ const MahasiswaMbkm = () => {
 			);
 
 			setData(data);
-
-			// localStorage.setItem('adminInfo', JSON.stringify(data));
-			console.log(data);
 		})();
 	}, []);
 
-	const columns = useMemo(
-		() => [
-			{
-				Header: 'No',
-				id: 'index',
-				accessor: (_row: any, i: number) => i + 1,
-			},
-			{
-				Header: 'NIM',
-				accessor: 'nim',
-			},
-			{
-				Header: 'Nama Lengkap',
-				accessor: 'fullName',
-			},
-			{
-				Header: 'SK Mitra',
-				accessor: 'skMitra',
-			},
-			{
-				Header: 'Borang Konversi',
-				accessor: '',
-			},
-			{
-				Header: 'Logsheet Harian',
-				accessor: 'show.runtime',
-			},
-			{
-				Header: 'Laporan Akhir',
-				accessor: 'show.status',
-			},
-		],
-		[]
-	);
+	let i = 1;
 
 	return (
 		<div>
@@ -70,14 +35,60 @@ const MahasiswaMbkm = () => {
 
 			<h3 className="mb-1">Mahasiswa MBKM</h3>
 			<hr className="mb-1" />
-
-			{data.length > 0 ? (
-				<Table columns={columns} data={data} />
-			) : (
-				<p>Data tidak tersedia!</p>
-			)}
+			<Table className="mb-1">
+				<thead>
+					<tr>
+						<th style={{ width: '3rem' }}>No</th>
+						<th style={{ width: '9rem' }}>NIM</th>
+						<th style={{ width: '' }}>Nama</th>
+						<th style={{ width: '' }}>SK Mitra</th>
+						<th style={{ width: '' }}>Detail</th>
+					</tr>
+				</thead>
+				<tbody>
+					{data.length &&
+						data?.map(({ _id, nim, fullName, skAcc }) => (
+							<tr key={_id}>
+								<td>{i++}</td>
+								<td>{nim}</td>
+								<td>{fullName}</td>
+								<td>
+									{skAcc ? 'Uploaded' : 'Belum'}
+									<hr style={{ margin: '.5rem 0' }} />
+									<p>approve/not</p>
+								</td>
+								<td>
+									<Link
+										style={{ color: 'black', textDecoration: 'none' }}
+										key={_id}
+										to={`/mahasiswa-mbkm/detail/${_id}`}
+									>
+										<p
+											style={{
+												padding: '.8rem 1rem',
+												backgroundColor: '#d0a616',
+												borderRadius: '.3rem',
+												width: 'fit-content',
+											}}
+										>
+											Detail
+										</p>
+									</Link>
+								</td>
+							</tr>
+						))}
+				</tbody>
+			</Table>
 		</div>
 	);
 };
 
 export default MahasiswaMbkm;
+
+const DelButton = styled.button`
+	all: unset;
+	padding: 0.8rem 1rem;
+	cursor: pointer;
+	background-color: #d0a616;
+	border-radius: 0.3rem;
+`;

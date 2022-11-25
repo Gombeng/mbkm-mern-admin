@@ -6,6 +6,7 @@ import Profil from './profil/Profil';
 import Isirps from './isiRps/IsiRps';
 import MahasiswaMbkm from './mahasiswaMbkm/MahasiswaMbkm';
 import InputMatkul from './inputMatkul/InputMatkul';
+import DetailMhsMBKM from './mahasiswaMbkm/detail';
 
 export {
 	Dashboard,
@@ -16,4 +17,5 @@ export {
 	Isirps,
 	MahasiswaMbkm,
 	InputMatkul,
+	DetailMhsMBKM,
 };

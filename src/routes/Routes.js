@@ -13,6 +13,7 @@ import {
 	Isirps,
 	MahasiswaMbkm,
 	InputMatkul,
+	DetailMhsMBKM,
 } from '../pages/Pages';
 
 const Routes = () => {
@@ -26,6 +27,11 @@ const Routes = () => {
 					<Route exact path="input-matkul" element={<InputMatkul />} />
 					<Route exact path="isi-rps" element={<Isirps />} />
 					<Route exact path="mahasiswa-mbkm" element={<MahasiswaMbkm />} />
+					<Route
+						exact
+						path="mahasiswa-mbkm/detail/:idStudent"
+						element={<DetailMhsMBKM />}
+					/>
 					<Route exact path="profil" element={<Profil />} />
 					<Route exact path="*" element={<NotFound />} />
 				</Route>
