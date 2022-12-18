@@ -35,7 +35,7 @@ const DetailMhsMBKM = () => {
 
 	const handleAcc = async (e) => {
 		await axios
-			.post(`http://localhost:8910/api/students/acc-borang/${e}`, config)
+			.post(`http://localhost:8910/api/students/acc-borang-by-admin/${e}`, config)
 			.then((data) => {
 				console.log(data);
 				window.location.reload();
@@ -48,7 +48,7 @@ const DetailMhsMBKM = () => {
 
 	const handleDec = async (e) => {
 		await axios
-			.post(`http://localhost:8910/api/students/dec-borang/${e}`, config)
+			.post(`http://localhost:8910/api/students/dec-borang-by-admin/${e}`, config)
 			.then((data) => {
 				console.log(data);
 				window.location.reload();
@@ -62,7 +62,7 @@ const DetailMhsMBKM = () => {
 	return (
 		<div>
 			<Helmet>
-				<title>Detail Mahasiswa MBKM | ADMIN Lapor MBKM</title>
+				<title>Detail Mahasiswa MBKM | SUPER ADMIN Lapor MBKM</title>
 			</Helmet>
 
 			<h3 className="mb-1">Detail Mahasiswa MBKM</h3>
@@ -73,7 +73,7 @@ const DetailMhsMBKM = () => {
 
 			<h4 className="mb-1">Tabel Borang mahasiswa</h4>
 
-			{student?.idBorangs?.map(({ _id, idAnswers, status, subject, i = 1 }) =>
+			{student?.idBorangs?.map(({ _id, idAnswers, statusKajur, statusDosen, subject, i = 1 }) =>
 				!idAnswers.length ? null : (
 					<div
 						key={_id}
@@ -82,7 +82,7 @@ const DetailMhsMBKM = () => {
 					>
 						<FlexBox className="mb-1">
 							<p>
-								<strong>{status}</strong> - {subject}
+								<strong>{statusDosen}</strong> - {subject}
 							</p>
 
 							<div>

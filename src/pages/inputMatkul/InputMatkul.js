@@ -77,7 +77,7 @@ const InputMatkul = () => {
 	return (
 		<div>
 			<Helmet>
-				<title>Input Mata Kuliah | ADMIN Lapor MBKM </title>
+				<title>Input Mata Kuliah | SUPER ADMIN Lapor MBKM </title>
 			</Helmet>
 
 			<p className="mb-1">Input Kode dan nama Mata Kuliah</p>

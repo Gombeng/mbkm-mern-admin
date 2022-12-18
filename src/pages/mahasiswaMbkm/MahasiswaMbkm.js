@@ -29,7 +29,7 @@ const MahasiswaMbkm = () => {
 	return (
 		<div>
 			<Helmet>
-				<title>Mahasiswa MBKM | ADMIN Lapor MBKM </title>
+				<title>Mahasiswa MBKM | SUPER ADMIN Lapor MBKM </title>
 			</Helmet>
 
 			<h3 className="mb-1">Mahasiswa MBKM</h3>

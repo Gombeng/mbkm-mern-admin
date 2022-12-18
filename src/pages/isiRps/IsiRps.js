@@ -76,7 +76,7 @@ const Isirps = () => {
 	return (
 		<div>
 			<Helmet>
-				<title>Isi RPS | ADMIN Lapor MBKM </title>
+				<title>Isi RPS | SUPER ADMIN Lapor MBKM </title>
 			</Helmet>
 
 			<p className="mb-1">Input RPS Mata Kuliah</p>
