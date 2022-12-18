@@ -113,7 +113,6 @@ const DetailMhsMBKM = () => {
 									<th style={{ width: '3rem' }}>No</th>
 									<th style={{ width: '25rem' }}>Deskripsi CPMK</th>
 									<th style={{ width: '' }}>Jawaban Mahasiswa</th>
-									<th style={{ width: '' }}>Status Ketua Jurusan</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -122,7 +121,6 @@ const DetailMhsMBKM = () => {
 										<td>{i++}</td>
 										<td>{name}</td>
 										<td>{answer}</td>
-										<td>{acc}</td>
 									</tr>
 								))}
 							</tbody>

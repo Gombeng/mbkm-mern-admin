@@ -52,7 +52,7 @@ const MahasiswaMbkm = () => {
 							<td colSpan={3}>Data kosong</td>
 						</tr>
 					) : (
-						data?.map(({ _id, nim, fullName, programMbkm, skAcc, status }) => (
+						data?.map(({ _id, nim, fullName, programMbkm, skAcc, }) => (
 							<tr key={_id}>
 								<td>{i++}</td>
 								<td>{nim}</td>
