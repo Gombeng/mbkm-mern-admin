@@ -1,83 +1,52 @@
 import axios from 'axios';
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import ClipLoader from 'react-spinners/ClipLoader';
+import styled from 'styled-components';
 import { Button, Input, Table } from '../../components/Components';
 
 const InputMatkul = () => {
+	const adminInfo = JSON.parse(localStorage.getItem('adminInfo'));
 	const [loading, setLoading] = useState(false);
 	const [code, setCode] = useState('');
 	const [matkul, setMatkul] = useState('');
 	const [name, setName] = useState('');
 
-	const columns = useMemo(
-		() => [
-			{
-				Header: 'No',
-				id: 'index',
-				accessor: (_row: any, i: number) => i + 1,
-			},
-			{
-				Header: 'Kode Mata Kuliah',
-				accessor: 'code',
-			},
-			{
-				Header: 'Nama Mata Kuliah',
-				accessor: 'name',
-			},
-			{
-				Header: 'Aksi',
-				// accessor: 'name',
-			},
-		],
-		[]
-	);
-
 	useEffect(() => {
-		(async () => {
+		const fetchMatkul = async () => {
 			const config = {
 				headers: {
 					'Content-type': 'application/json',
 				},
 			};
-
-			const adminInfo = JSON.parse(localStorage.getItem('adminInfo'));
-
 			const { data } = await axios.get(
-				`http://localhost:8910/api/admin/getAll/subjects/${adminInfo?._id}`,
+				`http://localhost:8910/api/admins/subjects/${adminInfo?._id}`,
 				config
 			);
+			console.log('subjects', data.data.idSubjects);
+			setMatkul(data.data.idSubjects);
+		};
+		fetchMatkul();
+	}, [adminInfo?._id]);
 
-			setMatkul(data.data._subjects);
-
-			localStorage.setItem('adminInfo', JSON.stringify(data.data));
-			console.log(data.subjects);
-		})();
-	}, []);
+	const config = {
+		headers: {
+			'Content-type': 'application/json',
+		},
+	};
 
 	const submitHandler = async (e) => {
-		// e.preventDefault();
-		// ! dont forget to parse the json data
-		const adminInfo = JSON.parse(localStorage.getItem('adminInfo'));
-
 		try {
-			const config = {
-				headers: {
-					'Content-type': 'application/json',
-				},
-			};
-
 			setLoading(true);
-
 			const { data } = await axios.post(
-				`http://localhost:8910/api/admin/input-matkul/${adminInfo?._id}`,
+				`http://localhost:8910/api/admins/input-matkul/${adminInfo?._id}`,
 				{
 					code,
 					name,
 				},
 				config
 			);
-
+			console.log(data);
 			setLoading(false);
 		} catch (error) {
 			setLoading(false);
@@ -86,16 +55,33 @@ const InputMatkul = () => {
 		}
 	};
 
+	const deleteHandler = async (e) => {
+		setLoading(true);
+		let confirmBox = window.confirm('Hapus Mata Kuliah?');
+		if (confirmBox) {
+			await axios
+				.delete(`http://localhost:8910/api/admins/hapus-subject/${e}`, config)
+				.then((data) => {
+					console.log(data);
+					setLoading(false);
+				})
+				.catch((err) => {
+					setLoading(false);
+					console.log(err);
+				});
+		}
+		window.location.reload();
+	};
+
+	let i = 1;
 	return (
 		<div>
 			<Helmet>
 				<title>Input Mata Kuliah | ADMIN Lapor MBKM </title>
 			</Helmet>
 
-			<h3 className="mb-1">Input Mata Kuliah</h3>
-			<hr className="mb-1" />
+			<p className="mb-1">Input Kode dan nama Mata Kuliah</p>
 
-			{/* form untuk inputan kode cpmk dan deskcripsi cpmk beserta button submit */}
 			<form action="" className="mb-1" onSubmit={submitHandler}>
 				<Input
 					value={code}
@@ -117,15 +103,50 @@ const InputMatkul = () => {
 				/>
 			</form>
 
-			<div className="mb-1">
-				<h3 className="mb-1">Daftar Mata Kuliah Yang Sudah Diinput</h3>
+			<p className="mb-1">Daftar Mata Kuliah Yang Sudah Diinput</p>
 
-				<hr className="mb-1" />
+			<Table className="mb-1">
+				<thead>
+					<tr>
+						<th style={{ width: '3rem' }}>No</th>
+						<th style={{ width: '10rem' }}>Kode</th>
+						<th style={{ width: '' }}>Nama</th>
+						<th style={{ width: '5rem' }}>Aksi</th>
+					</tr>
+				</thead>
+				<tbody>
+					{!matkul?.length ? (
+						<tr>
+							<td colSpan={3}>Mata Kuliah belum diinput.</td>
+						</tr>
+					) : (
+						matkul?.map(({ _id, code, name }) => (
+							<tr key={_id}>
+								<td>{i++}</td>
+								<td>{code}</td>
+								<td>{name}</td>
 
-				{matkul.length > 0 ? <Table columns={columns} data={matkul} /> : null}
-			</div>
+								<td>
+									{/* <p style={{ padding: '.3rem' }}>Edit</p> */}
+									<DelButton onClick={() => deleteHandler(_id)}>
+										Hapus
+									</DelButton>
+								</td>
+							</tr>
+						))
+					)}
+				</tbody>
+			</Table>
 		</div>
 	);
 };
 
 export default InputMatkul;
+
+const DelButton = styled.button`
+	all: unset;
+	padding: 0.8rem 1rem;
+	cursor: pointer;
+	background-color: #d0a616;
+	border-radius: 0.3rem;
+`;

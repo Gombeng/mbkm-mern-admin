@@ -2,27 +2,26 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
 import { Table } from './../../components/Components';
 
 const MahasiswaMbkm = () => {
 	const [data, setData] = useState([]);
 
 	useEffect(() => {
-		(async () => {
+		const fetchStudent = async () => {
 			const config = {
 				headers: {
 					'Content-type': 'application/json',
 				},
 			};
-
 			const { data } = await axios.get(
-				`http://localhost:8910/api/student/getAll`,
+				`http://localhost:8910/api/students`,
 				config
 			);
-
-			setData(data);
-		})();
+			console.log('student', data.data);
+			setData(data.data);
+		};
+		fetchStudent();
 	}, []);
 
 	let i = 1;
@@ -46,21 +45,21 @@ const MahasiswaMbkm = () => {
 					</tr>
 				</thead>
 				<tbody>
-					{data.length &&
+					{!data?.length ? (
+						<tr>
+							<td colSpan={3}>Data kosong</td>
+						</tr>
+					) : (
 						data?.map(({ _id, nim, fullName, skAcc }) => (
 							<tr key={_id}>
 								<td>{i++}</td>
 								<td>{nim}</td>
 								<td>{fullName}</td>
-								<td>
-									{skAcc ? 'Uploaded' : 'Belum'}
-									<hr style={{ margin: '.5rem 0' }} />
-									<p>approve/not</p>
-								</td>
+								<td>{skAcc ? 'Uploaded' : 'Belum'}</td>
 								<td>
 									<Link
-										style={{ color: 'black', textDecoration: 'none' }}
 										key={_id}
+										style={{ color: 'black', textDecoration: 'none' }}
 										to={`/mahasiswa-mbkm/detail/${_id}`}
 									>
 										<p
@@ -76,7 +75,8 @@ const MahasiswaMbkm = () => {
 									</Link>
 								</td>
 							</tr>
-						))}
+						))
+					)}
 				</tbody>
 			</Table>
 		</div>
@@ -84,11 +84,3 @@ const MahasiswaMbkm = () => {
 };
 
 export default MahasiswaMbkm;
-
-const DelButton = styled.button`
-	all: unset;
-	padding: 0.8rem 1rem;
-	cursor: pointer;
-	background-color: #d0a616;
-	border-radius: 0.3rem;
-`;
