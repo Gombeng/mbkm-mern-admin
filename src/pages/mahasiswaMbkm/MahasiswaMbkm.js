@@ -40,7 +40,9 @@ const MahasiswaMbkm = () => {
 						<th style={{ width: '3rem' }}>No</th>
 						<th style={{ width: '9rem' }}>NIM</th>
 						<th style={{ width: '' }}>Nama</th>
+						<th style={{ width: '' }}>Program MBKM</th>
 						<th style={{ width: '' }}>SK Mitra</th>
+						<th style={{ width: '' }}>Status Ketua Jurusan</th>
 						<th style={{ width: '' }}>Detail</th>
 					</tr>
 				</thead>
@@ -50,12 +52,14 @@ const MahasiswaMbkm = () => {
 							<td colSpan={3}>Data kosong</td>
 						</tr>
 					) : (
-						data?.map(({ _id, nim, fullName, skAcc }) => (
+						data?.map(({ _id, nim, fullName, programMbkm, skAcc, status }) => (
 							<tr key={_id}>
 								<td>{i++}</td>
 								<td>{nim}</td>
 								<td>{fullName}</td>
+								<td>{fullName}</td>
 								<td>{skAcc ? 'Uploaded' : 'Belum'}</td>
+								<td>{fullName}</td>
 								<td>
 									<Link
 										key={_id}
