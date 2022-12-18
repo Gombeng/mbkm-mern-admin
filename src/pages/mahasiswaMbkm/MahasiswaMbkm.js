@@ -42,7 +42,7 @@ const MahasiswaMbkm = () => {
 						<th style={{ width: '' }}>Nama</th>
 						<th style={{ width: '' }}>Program MBKM</th>
 						<th style={{ width: '' }}>SK Mitra</th>
-						<th style={{ width: '' }}>Status Ketua Jurusan</th>
+						<th style={{ width: '' }}>Laporan Akhir</th>
 						<th style={{ width: '' }}>Detail</th>
 					</tr>
 				</thead>
