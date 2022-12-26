@@ -11,7 +11,7 @@ const NotFound = () => {
 	return (
 		<Container>
 			<Helmet>
-				<title>Not Found | SUPER ADMIN Lapor MBKM</title>
+				<title>Not Found |  Lapor MBKM</title>
 			</Helmet>
 			<h1 className="mb-1">Page Not Found</h1>
 			<img className="mb-1" src={NotFoundBg} alt="Page Not Found" />

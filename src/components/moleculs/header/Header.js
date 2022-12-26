@@ -19,7 +19,7 @@ const Header = () => {
 		<Container>
 			<Flex>
 				<img className="mr-1" src={Logo} width={30} alt="Logo" />
-				<p>Lapor MBKM</p>
+				<p>Lapor MBKM | Admin</p>
 			</Flex>
 			<Button title="Keluar" className="button link" onClick={logOut} />
 		</Container>

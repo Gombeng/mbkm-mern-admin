@@ -7,7 +7,7 @@ const Dashboard = () => {
 	return (
 		<div>
 			<Helmet>
-				<title>Dashboard | SUPER ADMIN Lapor MBKM</title>
+				<title>Dashboard |  Lapor MBKM</title>
 			</Helmet>
 			<div className="mb-1">
 				<h3>Selamat datang, {adminInfo?.fullName}!</h3>

@@ -11,7 +11,7 @@ const Profil = () => {
 	return (
 		<div>
 			<Helmet>
-				<title>Profil | SUPER ADMIN Lapor MBKM </title>
+				<title>Profil |  Lapor MBKM </title>
 			</Helmet>
 
 			<h3 className="mb-1">Profil</h3>

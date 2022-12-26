@@ -59,7 +59,7 @@ const Login = () => {
 	return (
 		<Container>
 			<Helmet>
-				<title>Masuk | SUPER ADMIN Lapor MBKM</title>
+				<title>Masuk |  Lapor MBKM</title>
 			</Helmet>
 
 			<div className="left">

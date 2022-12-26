@@ -29,7 +29,7 @@ const MahasiswaMbkm = () => {
 	return (
 		<div>
 			<Helmet>
-				<title>Mahasiswa MBKM | SUPER ADMIN Lapor MBKM </title>
+				<title>Mahasiswa MBKM |  Lapor MBKM </title>
 			</Helmet>
 
 			<h3 className="mb-1">Mahasiswa MBKM</h3>
@@ -41,7 +41,7 @@ const MahasiswaMbkm = () => {
 						<th style={{ width: '9rem' }}>NIM</th>
 						<th style={{ width: '' }}>Nama</th>
 						<th style={{ width: '' }}>SK Mitra</th>
-						<th style={{ width: '' }}>Detail</th>
+						<th style={{ width: '10rem' }}>Detail</th>
 					</tr>
 				</thead>
 				<tbody>

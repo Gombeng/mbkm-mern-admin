@@ -35,7 +35,10 @@ const DetailMhsMBKM = () => {
 
 	const handleAcc = async (e) => {
 		await axios
-			.post(`http://localhost:8910/api/students/acc-borang-by-admin/${e}`, config)
+			.post(
+				`http://localhost:8910/api/students/acc-borang-by-admin/${e}`,
+				config
+			)
 			.then((data) => {
 				console.log(data);
 				window.location.reload();
@@ -48,7 +51,10 @@ const DetailMhsMBKM = () => {
 
 	const handleDec = async (e) => {
 		await axios
-			.post(`http://localhost:8910/api/students/dec-borang-by-admin/${e}`, config)
+			.post(
+				`http://localhost:8910/api/students/dec-borang-by-admin/${e}`,
+				config
+			)
 			.then((data) => {
 				console.log(data);
 				window.location.reload();
@@ -59,22 +65,28 @@ const DetailMhsMBKM = () => {
 			});
 	};
 
+	let j = 1;
+
 	return (
 		<div>
 			<Helmet>
-				<title>Detail Mahasiswa MBKM | SUPER ADMIN Lapor MBKM</title>
+				<title>Detail Mahasiswa MBKM | Lapor MBKM</title>
 			</Helmet>
 
 			<h3 className="mb-1">Detail Mahasiswa MBKM</h3>
 			<hr className="mb-1" />
 
-			<p className="mb-1">{student?.fullName}</p>
-			<p className="mb-1">{student?.nim}</p>
+			<p className="mb-1">Nama : {student?.fullName}</p>
+			<p className="mb-1">NIM : {student?.nim}</p>
+			<p className="mb-1">
+				Laporan Akhir :
+				{!student?.laporanAkhir ? ' Belum Diupload' : <a href={student?.laporanAkhir}> {student?.laporanAkhir}</a> }
+			</p>
 
 			<h4 className="mb-1">Tabel Borang mahasiswa</h4>
 
-			{student?.idBorangs?.map(({ _id, idAnswers, statusKajur, statusDosen, subject, i = 1 }) =>
-				!idAnswers.length ? null : (
+			{student?.idBorangs?.map(
+				({ _id, idAnswers, statusKajur, statusDosen, subject, i = 1 }) => (
 					<div
 						key={_id}
 						// style={{ border: '1px solid black', padding: '1rem ' }}
@@ -130,6 +142,32 @@ const DetailMhsMBKM = () => {
 					</div>
 				)
 			)}
+
+			<h4 className="mb-1">Tabel Logsheet / Logbook harian mahasiswa</h4>
+
+			<Table className="mb-1">
+				<thead>
+					<tr>
+						<th style={{ width: '3rem' }}>No</th>
+						{/* <th style={{ width: '8rem' }}>Tanggal</th> */}
+						<th style={{ width: '' }}>
+							Link Logsheet / Logbook harian Mahasiswa
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					{student?.logsheet?.map((item) => (
+						<tr key={item}>
+							<td>{j++}</td>
+							<td>
+								<a href={item} target="_blank" rel="noreferrer">
+									{item}
+								</a>
+							</td>
+						</tr>
+					))}
+				</tbody>
+			</Table>
 		</div>
 	);
 };
