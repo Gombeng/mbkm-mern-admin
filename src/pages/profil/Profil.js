@@ -18,6 +18,10 @@ const Profil = () => {
 			<hr className="mb-1" />
 
 			<div className="mb-1">
+				<p>NIP</p>
+				<strong>{adminInfo?.nip}</strong>
+			</div>
+			<div className="mb-1">
 				<p>Nama Lengkap</p>
 				<strong>{adminInfo?.fullName}</strong>
 			</div>

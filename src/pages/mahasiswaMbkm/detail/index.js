@@ -5,6 +5,10 @@ import { Helmet } from 'react-helmet';
 import { Button, Table, FlexBox } from '../../../components/Components';
 import { ClipLoader } from 'react-spinners/ClipLoader';
 
+// pdf maker
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 const DetailMhsMBKM = () => {
 	const { idStudent } = useParams();
 	const [student, setStudent] = useState('');
@@ -67,6 +71,74 @@ const DetailMhsMBKM = () => {
 
 	let j = 1;
 
+	// component to open pdf
+	const open = (id) => {
+		const dataBorangs = student.idBorangs.filter((x) => x._id === id)[0];
+
+		const tableHead = [
+			{ text: 'No', style: 'tableHeader' },
+			{ text: 'Deskripsi CPMK', style: 'tableHeader' },
+			{ text: 'Jawaban Mahasiswa', style: 'tableHeader' },
+		];
+		const dataBody = dataBorangs.idAnswers.map((x, i) => {
+			return [i + 1, x.name, x.answer];
+		});
+		const dd = {
+			pageSize: 'A4',
+			// todo: tambah ttd mhs, dosen pengampu dan kajur
+			content: [
+				{ text: `Nama Mahasiswa: ${student?.fullName}`, style: 'subheader' },
+				{ text: `NIM: ${student?.nim}`, style: 'subheader' },
+				{ text: `Mata Kuliah: ${dataBorangs?.subject}`, style: 'subheader' },
+				{
+					style: 'tableExample',
+					table: {
+						headerRows: 1,
+						widths: [24, 200, '*'],
+						body: [tableHead, ...dataBody],
+					},
+				},
+				{
+					margin: [40, 30, 40, 80],
+					top: 100,
+					columns: [
+						{
+							width: '50%',
+							text: 'Mahasiswa',
+						},
+						{
+							alignment: 'right',
+							width: '50%',
+							text: 'Dosen Pengampu',
+						},
+					],
+				},
+				{
+					margin: [0, 0, 0, 80],
+					alignment: 'center',
+					text: 'Kepala Jurusan',
+				},
+			],
+
+			styles: {
+				subheader: {
+					fontSize: 13,
+					bold: true,
+					margin: [0, 5, 0, 5],
+				},
+				tableHeader: {
+					bold: true,
+					fontSize: 13,
+					color: 'black',
+				},
+				tableExample: {
+					margin: [0, 15, 0, 25],
+				},
+			},
+		};
+		pdfMake.createPdf(dd).open();
+	};
+
 	return (
 		<div>
 			<Helmet>
@@ -79,8 +151,20 @@ const DetailMhsMBKM = () => {
 			<p className="mb-1">Nama : {student?.fullName}</p>
 			<p className="mb-1">NIM : {student?.nim}</p>
 			<p className="mb-1">
+				Surat Keterangan diterima Mitra :
+				{!student?.skAcc ? (
+					' Belum Diupload'
+				) : (
+					<a href={student?.skAcc}> {student?.skAcc}</a>
+				)}
+			</p>
+			<p className="mb-1">
 				Laporan Akhir :
-				{!student?.laporanAkhir ? ' Belum Diupload' : <a href={student?.laporanAkhir}> {student?.laporanAkhir}</a> }
+				{!student?.laporanAkhir ? (
+					' Belum Diupload'
+				) : (
+					<a href={student?.laporanAkhir}> {student?.laporanAkhir}</a>
+				)}
 			</p>
 
 			<h4 className="mb-1">Tabel Borang mahasiswa</h4>
@@ -98,6 +182,16 @@ const DetailMhsMBKM = () => {
 							</p>
 
 							<div>
+								<Button
+									title={loading ? <ClipLoader size={20} /> : 'Open PDF File'}
+									className="button mr-1"
+									style={{
+										background: '#3792cb',
+										marginRight: '1rem',
+									}}
+									onClick={() => open(_id)}
+								/>
+
 								<Button
 									title={loading ? <ClipLoader size={20} /> : 'Terima'}
 									className="button mr-1"
@@ -128,13 +222,19 @@ const DetailMhsMBKM = () => {
 								</tr>
 							</thead>
 							<tbody>
-								{idAnswers?.map(({ _id, name, answer, acc }) => (
-									<tr key={_id}>
-										<td>{i++}</td>
-										<td>{name}</td>
-										<td>{answer}</td>
+								{idAnswers?.length === 0 ? (
+									<tr>
+										<td colSpan={2}>Data Kosong</td>
 									</tr>
-								))}
+								) : (
+									idAnswers?.map(({ _id, name, answer, acc }) => (
+										<tr key={_id}>
+											<td>{i++}</td>
+											<td>{name}</td>
+											<td>{answer}</td>
+										</tr>
+									))
+								)}
 							</tbody>
 						</Table>
 
@@ -156,16 +256,22 @@ const DetailMhsMBKM = () => {
 					</tr>
 				</thead>
 				<tbody>
-					{student?.logsheet?.map((item) => (
-						<tr key={item}>
-							<td>{j++}</td>
-							<td>
-								<a href={item} target="_blank" rel="noreferrer">
-									{item}
-								</a>
-							</td>
+					{student?.logsheet?.length === 0 ? (
+						<tr>
+							<td colSpan={2}>Data Kosong</td>
 						</tr>
-					))}
+					) : (
+						student?.logsheet?.map((item) => (
+							<tr key={item}>
+								<td>{j++}</td>
+								<td>
+									<a href={item} target="_blank" rel="noreferrer">
+										{item}
+									</a>
+								</td>
+							</tr>
+						))
+					)}
 				</tbody>
 			</Table>
 		</div>
